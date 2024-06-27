@@ -50,7 +50,7 @@ async function displayCategoriesBoutons() {
     // Associer les classes css des boutons aux catégories
     switch (categorie.name) {
       case "Tous":
-        btn.classList.add("button-all", "btnFilter");
+        btn.classList.add("button-all", "btnFilter",);
         break;
       case "Objets":
         btn.classList.add("Objets", "btnFilter");
@@ -104,7 +104,10 @@ buttonSort.addEventListener("click", function (event) {
       event.target.getAttribute(
         "data-category-name"
       ); /* Obtient la catégorie à partir de "data-category-name" */
-    updateWorks(
+      const buttons = buttonSort.querySelectorAll("button");
+      buttons.forEach(button => button.classList.remove("buttonGreen"));
+      event.target.classList.add("buttonGreen");
+      updateWorks(
       category
     ); /* Met à jour l'affichage avec la catégorie sélectionnée */
   }
@@ -162,12 +165,13 @@ displayProjetButton();
 
 /* Ajout du modal */
 const buttonModif = document.querySelector(".projet-connected button")
-
+if (token) {
 buttonModif.addEventListener("click", function () {
   containerModal.style.display = "flex";
   modal.style.display = "flex";
   displayModalWorks();
 });
+}
 xmark.addEventListener("click", function () {
   containerModal.style.display = "none";
 });
